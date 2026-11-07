@@ -3,7 +3,7 @@
 このリポジトリは **自動生成** です。`kakeibo` 本体リポジトリの main が更新されるたびに、
 GitHub Actions がソース（DDL・コード・本体文書）から再生成して上書きします。直接編集しないでください。
 
-生成元コミット: `f42153d6be023f2fd54583b1e9bd1ccf3e35754b`（kakeibo main）
+生成元コミット: `697cc58d26b1932c112fa95152c79151646304ef`（kakeibo main）
 
 ## 設計書一覧
 
@@ -37,3 +37,4 @@ GitHub Actions がソース（DDL・コード・本体文書）から再生成�
 - [ADR-0010 設計書は専用リポジトリへ自動生成・自動同期する](adr/0010-design-docs-repo.md)
 - [ADR-0011 Spring Boot を 3.5.x へアップグレードする](adr/0011-spring-boot-35-upgrade.md)
 - [ADR-0012 Nuxt を 4.x へ移行する](adr/0012-nuxt4-migration.md)
+- [ADR-0013 Spring Boot を 4.1.x へアップグレードする](adr/0013-spring-boot-4-upgrade.md)
