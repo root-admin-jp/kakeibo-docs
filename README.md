@@ -3,7 +3,7 @@
 このリポジトリは **自動生成** です。`kakeibo` 本体リポジトリの main が更新されるたびに、
 GitHub Actions がソース（DDL・コード・本体文書）から再生成して上書きします。直接編集しないでください。
 
-生成元コミット: `b775bfbd0d7928ac6e3e26e930b94fc13cfc8f2d`（kakeibo main）
+生成元コミット: `43ce51f44c1c86b7d350780183d6dee5614a8abc`（kakeibo main）
 
 ## 設計書一覧
 
