@@ -3,7 +3,7 @@
 このリポジトリは **自動生成** です。`kakeibo` 本体リポジトリの main が更新されるたびに、
 GitHub Actions がソース（DDL・コード・本体文書）から再生成して上書きします。直接編集しないでください。
 
-生成元コミット: `8993487440f8a3caf27cba0cc458740b0809ac94`（kakeibo main）
+生成元コミット: `af0e09791212658171f35caf641d64924f501d8b`（kakeibo main）
 
 ## 設計書一覧
 
@@ -34,3 +34,4 @@ GitHub Actions がソース（DDL・コード・本体文書）から再生成�
 - [ADR-0007 テナント分離 (将来公開前提) と共有なし](adr/0007-tenancy-no-sharing.md)
 - [ADR-0008 DBアクセスは当面 JdbcTemplate とし、jOOQコード生成は保留する](adr/0008-jdbc-template.md)
 - [ADR-0009 DBアクセスは MyBatis を使う（jOOQ / JdbcTemplate から変更）](adr/0009-mybatis.md)
+- [ADR-0010 設計書は専用リポジトリへ自動生成・自動同期する](adr/0010-design-docs-repo.md)
