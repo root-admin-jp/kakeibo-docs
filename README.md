@@ -3,7 +3,7 @@
 このリポジトリは **自動生成** です。`kakeibo` 本体リポジトリの main が更新されるたびに、
 GitHub Actions がソース（DDL・コード・本体文書）から再生成して上書きします。直接編集しないでください。
 
-生成元コミット: `4386abd2e3081db625c2954fac12a7fb08a2dc32`（kakeibo main）
+生成元コミット: `d4548c0f41fc43fefa7326536b54c61bc293426c`（kakeibo main）
 
 ## 設計書一覧
 
@@ -35,3 +35,4 @@ GitHub Actions がソース（DDL・コード・本体文書）から再生成�
 - [ADR-0008 DBアクセスは当面 JdbcTemplate とし、jOOQコード生成は保留する](adr/0008-jdbc-template.md)
 - [ADR-0009 DBアクセスは MyBatis を使う（jOOQ / JdbcTemplate から変更）](adr/0009-mybatis.md)
 - [ADR-0010 設計書は専用リポジトリへ自動生成・自動同期する](adr/0010-design-docs-repo.md)
+- [ADR-0011 Spring Boot を 3.5.x へアップグレードする](adr/0011-spring-boot-35-upgrade.md)
