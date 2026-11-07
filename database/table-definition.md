@@ -112,7 +112,7 @@
 | 1 | id | BIGINT UNSIGNED | 不可 | - | PK, AUTO_INCREMENT |
 | 2 | household_id | BIGINT UNSIGNED | 不可 | - | FK → households.id, UNIQUE(uq_budgets) |
 | 3 | category_id | BIGINT UNSIGNED | 不可 | - | FK → categories.id, UNIQUE(uq_budgets) |
-| 4 | year_month | CHAR(7) | 不可 | - | UNIQUE(uq_budgets) |
+| 4 | target_month | CHAR(7) | 不可 | - | UNIQUE(uq_budgets) |
 | 5 | amount | BIGINT | 不可 | - |  |
 | 6 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
 | 7 | updated_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP (更新時も) |  |

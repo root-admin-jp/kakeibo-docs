@@ -62,7 +62,7 @@ erDiagram
         BIGINT_UNSIGNED id PK
         BIGINT_UNSIGNED household_id FK
         BIGINT_UNSIGNED category_id FK
-        CHAR_7 year_month UK
+        CHAR_7 target_month UK
         BIGINT amount
         TIMESTAMP created_at
         TIMESTAMP updated_at
