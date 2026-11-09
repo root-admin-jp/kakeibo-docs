@@ -98,6 +98,25 @@ erDiagram
         TIMESTAMP consumed_at
         TIMESTAMP created_at
     }
+    passkey_credentials {
+        BIGINT_UNSIGNED id PK
+        BIGINT_UNSIGNED user_id FK
+        VARCHAR_255 credential_id UK
+        TEXT public_key_cose
+        BIGINT_UNSIGNED sign_count
+        VARCHAR_100 name
+        TIMESTAMP created_at
+        TIMESTAMP last_used_at
+    }
+    webauthn_challenges {
+        BIGINT_UNSIGNED id PK
+        VARCHAR_255 challenge UK
+        BIGINT_UNSIGNED user_id
+        VARCHAR_20 kind
+        TEXT request_json
+        TIMESTAMP expires_at
+        TIMESTAMP created_at
+    }
     users ||--o{ households : "fk_households_owner: owner_user_id"
     households ||--o{ accounts : "fk_accounts_household: household_id"
     financial_institutions ||--o{ accounts : "fk_accounts_institution: institution_id"
@@ -114,6 +133,7 @@ erDiagram
     financial_institutions ||--o{ import_jobs : "fk_import_jobs_institution: institution_id"
     households ||--o{ institution_connections : "fk_ic_household: household_id"
     financial_institutions ||--o{ institution_connections : "fk_ic_institution: institution_id"
+    users ||--o{ passkey_credentials : "fk_passkey_user: user_id"
 ```
 
 ## リレーション一覧
@@ -136,3 +156,4 @@ erDiagram
 | fk_import_jobs_institution | import_jobs.institution_id | financial_institutions.id |
 | fk_ic_household | institution_connections.household_id | households.id |
 | fk_ic_institution | institution_connections.institution_id | financial_institutions.id |
+| fk_passkey_user | passkey_credentials.user_id | users.id |

@@ -9,7 +9,8 @@
 | `/accounts` | 口座 | `apps/web/app/pages/accounts.vue` | - | `/api/accounts`, `/api/institutions`, `/api/accounts/{param}` |
 | `/categories` | カテゴリ | `apps/web/app/pages/categories.vue` | - | `/api/categories`, `/api/categories/{param}` |
 | `/` | ダッシュボード | `apps/web/app/pages/index.vue` | カテゴリ別支出, 口座残高 | `/api/summary/monthly?month={param}`, `/api/accounts` |
-| `/login` | Kakeibo | `apps/web/app/pages/login.vue` | - | `/api/auth/request-code`, `/api/auth/verify-code` |
+| `/login` | Kakeibo | `apps/web/app/pages/login.vue` | - | `/api/auth/request-code`, `/api/auth/passkey/login/options`, `/api/auth/passkey/login/verify`, `/api/auth/verify-code` |
+| `/passkeys` | パスキー | `apps/web/app/pages/passkeys.vue` | - | `/api/passkeys`, `/api/passkeys/register/options`, `/api/passkeys/register/verify`, `/api/passkeys/{param}` |
 | `/transactions` | 取引 | `apps/web/app/pages/transactions.vue` | - | `/api/transactions?month={param}`, `/api/accounts`, `/api/categories`, `/api/transactions/{param}`, `/api/transactions`, `/api/transactions/import?accountId={param}`, `/api/transactions/export.csv?month={param}` |
 
 ## 画面遷移図
@@ -19,6 +20,7 @@ flowchart LR
     login["/login ログイン/登録"] -->|ログイン成功| index["/ ダッシュボード"]
     index -->|ヘッダーナビ| accounts["/accounts 口座"]
     index -->|ヘッダーナビ| categories["/categories カテゴリ"]
+    index -->|ヘッダーナビ| passkeys["/passkeys パスキー"]
     index -->|ヘッダーナビ| transactions["/transactions 取引"]
 ```
 
@@ -46,7 +48,13 @@ flowchart LR
 
 - 画面ファイル: `apps/web/app/pages/login.vue`
 - 入力要素: input type = email, text
-- 利用API: `/api/auth/request-code`, `/api/auth/verify-code`
+- 利用API: `/api/auth/request-code`, `/api/auth/passkey/login/options`, `/api/auth/passkey/login/verify`, `/api/auth/verify-code`
+
+### /passkeys パスキー
+
+- 画面ファイル: `apps/web/app/pages/passkeys.vue`
+- 入力要素: input type = text
+- 利用API: `/api/passkeys`, `/api/passkeys/register/options`, `/api/passkeys/register/verify`, `/api/passkeys/{param}`
 
 ### /transactions 取引
 

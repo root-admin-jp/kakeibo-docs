@@ -3,7 +3,7 @@
 生成元: `db/migration/V*.sql`（Flyway マイグレーションを版順に全て適用した実効スキーマ）。金額は JPY の整数。金融機関の認証情報は保存しない。
 テナント分離: 全業務テーブルは `household_id` で分離し、1テナント = 1オーナーユーザー（ADR-0007）。
 
-テーブル数: 10
+テーブル数: 12
 
 | テーブル | カラム数 | 主キー | 備考 |
 |---|---|---|---|
@@ -17,6 +17,8 @@
 | [import_jobs](#import_jobs) | 10 | id | CSV取込ジョブ履歴 |
 | [institution_connections](#institution_connections) | 8 | id | 金融機関連携（外部参照のみ保持） |
 | [login_codes](#login_codes) | 8 | id | OTPログインコード（ハッシュのみ保持、ワンタイム） |
+| [passkey_credentials](#passkey_credentials) | 8 | id | パスキー資格情報（公開鍵のみ保持） |
+| [webauthn_challenges](#webauthn_challenges) | 7 | id | WebAuthnチャレンジ（ワンタイム、短時間で失効） |
 
 ## users
 
@@ -165,6 +167,39 @@ OTPログインコード（ハッシュのみ保持、ワンタイム）
 | 8 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
 
 インデックス: idx_login_codes_email(email)
+
+## passkey_credentials
+
+パスキー資格情報（公開鍵のみ保持）
+
+| # | カラム | 型 | NULL | デフォルト | その他 |
+|---|---|---|---|---|---|
+| 1 | id | BIGINT UNSIGNED | 不可 | - | PK, AUTO_INCREMENT |
+| 2 | user_id | BIGINT UNSIGNED | 不可 | - | FK → users.id |
+| 3 | credential_id | VARCHAR(255) | 不可 | - | UNIQUE(uq_passkey_credential_id) |
+| 4 | public_key_cose | TEXT | 不可 | - |  |
+| 5 | sign_count | BIGINT UNSIGNED | 不可 | 0 |  |
+| 6 | name | VARCHAR(100) | 不可 | - |  |
+| 7 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
+| 8 | last_used_at | TIMESTAMP | 可 | - |  |
+
+インデックス: idx_passkey_user(user_id)
+
+## webauthn_challenges
+
+WebAuthnチャレンジ（ワンタイム、短時間で失効）
+
+| # | カラム | 型 | NULL | デフォルト | その他 |
+|---|---|---|---|---|---|
+| 1 | id | BIGINT UNSIGNED | 不可 | - | PK, AUTO_INCREMENT |
+| 2 | challenge | VARCHAR(255) | 不可 | - | UNIQUE(uq_webauthn_challenge) |
+| 3 | user_id | BIGINT UNSIGNED | 可 | - |  |
+| 4 | kind | VARCHAR(20) | 不可 | - |  |
+| 5 | request_json | TEXT | 不可 | - |  |
+| 6 | expires_at | TIMESTAMP | 不可 | - |  |
+| 7 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
+
+インデックス: idx_webauthn_challenge_expires(expires_at)
 
 ## 初期データ: financial_institutions
 

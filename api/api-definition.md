@@ -1,7 +1,7 @@
 # API定義書
 
 生成元: `apps/api` の Controller。認証は JWT (Bearer)。OpenAPI の正は API 起動時の `/swagger-ui.html`、本書は一覧用の生成ドキュメント。
-エンドポイント数: 17
+エンドポイント数: 23
 
 ## Account (`AccountController.kt`)
 
@@ -31,6 +31,23 @@ DTO `VerifyCodeRequest`: `@field:Email @field:NotBlank val email: String`, `@fie
 DTO `RequestCodeResponse`: `val sent: Boolean = true`
 
 DTO `AuthResponse`: `val token: String`, `val userId: Long`, `val householdId: Long`, `val email: String`, `val displayName: String`
+
+## Passkey (`PasskeyController.kt`)
+
+| メソッド | パス | ハンドラ | 備考 |
+|---|---|---|---|
+| POST | `/api/passkeys/register/options` | registerOptions | application/json |
+| POST | `/api/passkeys/register/verify` | registerVerify |  |
+| GET | `/api/passkeys` | list |  |
+| DELETE | `/api/passkeys/{id}` | delete |  |
+| POST | `/api/auth/passkey/login/options` | loginOptions | application/json |
+| POST | `/api/auth/passkey/login/verify` | loginVerify |  |
+
+DTO `PasskeyResponse`: `val id: Long`, `val name: String`, `val createdAt: LocalDateTime?`, `val lastUsedAt: LocalDateTime?`
+
+DTO `RegisterVerifyRequest`: `@field:Size(max = 100) val name: String? = null`, `@field:NotBlank val challenge: String`, `val response: JsonNode`
+
+DTO `LoginVerifyRequest`: `@field:NotBlank val challenge: String`, `val response: JsonNode`
 
 ## Category (`CategoryController.kt`)
 
