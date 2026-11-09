@@ -10,9 +10,9 @@
 | [users](#users) | 5 | id | ログインユーザー |
 | [households](#households) | 5 | id | テナント（1オーナー専用） |
 | [financial_institutions](#financial_institutions) | 5 | id | 金融機関マスタ（初期データあり） |
-| [accounts](#accounts) | 7 | id | 口座（残高は取引から算出） |
+| [accounts](#accounts) | 8 | id | 口座（残高は取引の合計＋未記録の残高調整で算出） |
 | [categories](#categories) | 7 | id | カテゴリ（2階層: parent_id で親子） |
-| [transactions](#transactions) | 12 | id | 取引（収入/支出/振替、論理削除） |
+| [transactions](#transactions) | 12 | id | 取引（収入/支出/振替/残高調整、論理削除） |
 | [budgets](#budgets) | 7 | id | 予算（カテゴリ×月） |
 | [import_jobs](#import_jobs) | 10 | id | CSV取込ジョブ履歴 |
 | [institution_connections](#institution_connections) | 8 | id | 金融機関連携（外部参照のみ保持） |
@@ -58,7 +58,7 @@
 
 ## accounts
 
-口座（残高は取引から算出）
+口座（残高は取引の合計＋未記録の残高調整で算出）
 
 | # | カラム | 型 | NULL | デフォルト | その他 |
 |---|---|---|---|---|---|
@@ -69,6 +69,7 @@
 | 5 | kind | ENUM('cash','bank','credit_card','e_money','securities','other') | 不可 | - |  |
 | 6 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
 | 7 | updated_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP (更新時も) |  |
+| 8 | balance_offset | BIGINT | 不可 | 0 |  |
 
 ## categories
 
@@ -86,7 +87,7 @@
 
 ## transactions
 
-取引（収入/支出/振替、論理削除）
+取引（収入/支出/振替/残高調整、論理削除）
 
 | # | カラム | 型 | NULL | デフォルト | その他 |
 |---|---|---|---|---|---|
@@ -95,7 +96,7 @@
 | 3 | account_id | BIGINT UNSIGNED | 不可 | - | FK → accounts.id |
 | 4 | to_account_id | BIGINT UNSIGNED | 可 | - | FK → accounts.id |
 | 5 | category_id | BIGINT UNSIGNED | 可 | - | FK → categories.id |
-| 6 | type | ENUM('income','expense','transfer') | 不可 | - |  |
+| 6 | type | ENUM('income','expense','transfer','adjustment') | 不可 | - |  |
 | 7 | amount | BIGINT | 不可 | - |  |
 | 8 | transacted_on | DATE | 不可 | - |  |
 | 9 | memo | VARCHAR(500) | 可 | - |  |

@@ -12,7 +12,7 @@
 | PUT | `/api/accounts/{id}` | update |  |
 | DELETE | `/api/accounts/{id}` | delete |  |
 
-DTO `AccountRequest`: `val institutionId: Long?`, `@field:NotBlank val name: String`, `@field:NotBlank val kind: String`
+DTO `AccountRequest`: `val institutionId: Long?`, `@field:NotBlank val name: String`, `@field:NotBlank val kind: String`, `val currentBalance: Long? = null`, `val recordAdjustment: Boolean = true`
 
 DTO `AccountResponse`: `val id: Long`, `val institutionId: Long?`, `val name: String`, `val kind: String`, `val balance: Long`
 

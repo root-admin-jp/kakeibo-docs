@@ -33,6 +33,7 @@ erDiagram
         ENUM_cash_bank_credit_card_e_money_securities_other kind
         TIMESTAMP created_at
         TIMESTAMP updated_at
+        BIGINT balance_offset
     }
     categories {
         BIGINT_UNSIGNED id PK
@@ -49,7 +50,7 @@ erDiagram
         BIGINT_UNSIGNED account_id FK
         BIGINT_UNSIGNED to_account_id FK
         BIGINT_UNSIGNED category_id FK
-        ENUM_income_expense_transfer type
+        ENUM_income_expense_transfer_adjustment type
         BIGINT amount
         DATE transacted_on
         VARCHAR_500 memo

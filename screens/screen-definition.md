@@ -29,7 +29,7 @@ flowchart LR
 ### /accounts 口座
 
 - 画面ファイル: `apps/web/app/pages/accounts.vue`
-- 入力要素: input type = text / select 2件
+- 入力要素: input type = checkbox, number, text / select 2件
 - 利用API: `/api/accounts`, `/api/institutions`, `/api/accounts/{param}`
 
 ### /categories カテゴリ
