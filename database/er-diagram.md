@@ -1,13 +1,12 @@
 # ER図
 
-生成元: `db/migration/V1__init.sql` の外部キー制約。
+生成元: `db/migration/V*.sql`（全マイグレーション適用後）の外部キー制約。
 
 ```mermaid
 erDiagram
     users {
         BIGINT_UNSIGNED id PK
         VARCHAR_255 email UK
-        VARCHAR_255 password_hash
         VARCHAR_100 display_name
         TIMESTAMP created_at
         TIMESTAMP updated_at
@@ -88,6 +87,16 @@ erDiagram
         ENUM_active_revoked status
         TIMESTAMP created_at
         TIMESTAMP updated_at
+    }
+    login_codes {
+        BIGINT_UNSIGNED id PK
+        VARCHAR_255 email
+        CHAR_64 code_hash
+        VARCHAR_100 display_name
+        INT attempts
+        TIMESTAMP expires_at
+        TIMESTAMP consumed_at
+        TIMESTAMP created_at
     }
     users ||--o{ households : "fk_households_owner: owner_user_id"
     households ||--o{ accounts : "fk_accounts_household: household_id"

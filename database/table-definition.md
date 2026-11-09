@@ -1,13 +1,13 @@
 # テーブル定義書
 
-生成元: `db/migration/V1__init.sql`（Flyway DDL）。金額は JPY の整数。金融機関の認証情報は保存しない。
+生成元: `db/migration/V*.sql`（Flyway マイグレーションを版順に全て適用した実効スキーマ）。金額は JPY の整数。金融機関の認証情報は保存しない。
 テナント分離: 全業務テーブルは `household_id` で分離し、1テナント = 1オーナーユーザー（ADR-0007）。
 
-テーブル数: 9
+テーブル数: 10
 
 | テーブル | カラム数 | 主キー | 備考 |
 |---|---|---|---|
-| [users](#users) | 6 | id | ログインユーザー |
+| [users](#users) | 5 | id | ログインユーザー |
 | [households](#households) | 5 | id | テナント（1オーナー専用） |
 | [financial_institutions](#financial_institutions) | 5 | id | 金融機関マスタ（初期データあり） |
 | [accounts](#accounts) | 7 | id | 口座（残高は取引から算出） |
@@ -16,6 +16,7 @@
 | [budgets](#budgets) | 7 | id | 予算（カテゴリ×月） |
 | [import_jobs](#import_jobs) | 10 | id | CSV取込ジョブ履歴 |
 | [institution_connections](#institution_connections) | 8 | id | 金融機関連携（外部参照のみ保持） |
+| [login_codes](#login_codes) | 8 | id | OTPログインコード（ハッシュのみ保持、ワンタイム） |
 
 ## users
 
@@ -25,10 +26,9 @@
 |---|---|---|---|---|---|
 | 1 | id | BIGINT UNSIGNED | 不可 | - | PK, AUTO_INCREMENT |
 | 2 | email | VARCHAR(255) | 不可 | - | UNIQUE(uq_users_email) |
-| 3 | password_hash | VARCHAR(255) | 不可 | - |  |
-| 4 | display_name | VARCHAR(100) | 不可 | - |  |
-| 5 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
-| 6 | updated_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP (更新時も) |  |
+| 3 | display_name | VARCHAR(100) | 不可 | - |  |
+| 4 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
+| 5 | updated_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP (更新時も) |  |
 
 ## households
 
@@ -148,6 +148,23 @@ CSV取込ジョブ履歴
 | 6 | status | ENUM('active','revoked') | 不可 | 'active' |  |
 | 7 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
 | 8 | updated_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP (更新時も) |  |
+
+## login_codes
+
+OTPログインコード（ハッシュのみ保持、ワンタイム）
+
+| # | カラム | 型 | NULL | デフォルト | その他 |
+|---|---|---|---|---|---|
+| 1 | id | BIGINT UNSIGNED | 不可 | - | PK, AUTO_INCREMENT |
+| 2 | email | VARCHAR(255) | 不可 | - |  |
+| 3 | code_hash | CHAR(64) | 不可 | - |  |
+| 4 | display_name | VARCHAR(100) | 可 | - |  |
+| 5 | attempts | INT | 不可 | 0 |  |
+| 6 | expires_at | TIMESTAMP | 不可 | - |  |
+| 7 | consumed_at | TIMESTAMP | 可 | - |  |
+| 8 | created_at | TIMESTAMP | 不可 | CURRENT_TIMESTAMP |  |
+
+インデックス: idx_login_codes_email(email)
 
 ## 初期データ: financial_institutions
 
