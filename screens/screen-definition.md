@@ -9,7 +9,7 @@
 | `/accounts` | 口座 | `apps/web/app/pages/accounts.vue` | - | `/api/accounts`, `/api/institutions`, `/api/accounts/{param}` |
 | `/categories` | カテゴリ | `apps/web/app/pages/categories.vue` | - | `/api/categories`, `/api/categories/{param}` |
 | `/` | ダッシュボード | `apps/web/app/pages/index.vue` | カテゴリ別支出, 口座残高 | `/api/summary/monthly?month={param}`, `/api/accounts` |
-| `/login` | Kakeibo | `apps/web/app/pages/login.vue` | - | `/api/auth/login`, `/api/auth/register` |
+| `/login` | Kakeibo | `apps/web/app/pages/login.vue` | - | `/api/auth/request-code`, `/api/auth/verify-code` |
 | `/transactions` | 取引 | `apps/web/app/pages/transactions.vue` | - | `/api/transactions?month={param}`, `/api/accounts`, `/api/categories`, `/api/transactions/{param}`, `/api/transactions`, `/api/transactions/import?accountId={param}`, `/api/transactions/export.csv?month={param}` |
 
 ## 画面遷移図
@@ -45,8 +45,8 @@ flowchart LR
 ### /login Kakeibo
 
 - 画面ファイル: `apps/web/app/pages/login.vue`
-- 入力要素: input type = email, password, text
-- 利用API: `/api/auth/login`, `/api/auth/register`
+- 入力要素: input type = email, text
+- 利用API: `/api/auth/request-code`, `/api/auth/verify-code`
 
 ### /transactions 取引
 

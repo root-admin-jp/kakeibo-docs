@@ -3,7 +3,7 @@
 このリポジトリは **自動生成** です。`kakeibo` 本体リポジトリの main が更新されるたびに、
 GitHub Actions がソース（DDL・コード・本体文書）から再生成して上書きします。直接編集しないでください。
 
-生成元コミット: `de42ca792fcca24f525808beac9388b7f75ca598`（kakeibo main）
+生成元コミット: `573dae119a44e89085ac247cc2fe94e939f2a53f`（kakeibo main）
 
 ## 設計書一覧
 
@@ -38,3 +38,4 @@ GitHub Actions がソース（DDL・コード・本体文書）から再生成�
 - [ADR-0011 Spring Boot を 3.5.x へアップグレードする](adr/0011-spring-boot-35-upgrade.md)
 - [ADR-0012 Nuxt を 4.x へ移行する](adr/0012-nuxt4-migration.md)
 - [ADR-0013 Spring Boot を 4.1.x へアップグレードする](adr/0013-spring-boot-4-upgrade.md)
+- [ADR-0014 認証をパスワードレス（メール OTP ＋ パスキー）に移行する](adr/0014-passwordless-auth.md)

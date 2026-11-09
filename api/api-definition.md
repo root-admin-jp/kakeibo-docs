@@ -20,12 +20,15 @@ DTO `AccountResponse`: `val id: Long`, `val institutionId: Long?`, `val name: St
 
 | メソッド | パス | ハンドラ | 備考 |
 |---|---|---|---|
-| POST | `/api/auth/register` | register |  |
-| POST | `/api/auth/login` | login |  |
+| POST | `/api/auth/request-code` | requestCode |  |
+| POST | `/api/auth/verify-code` | verifyCode |  |
 
-DTO `RegisterRequest`: `@field:Email @field:NotBlank val email: String`, `@field:NotBlank @field:Size(min = 8, max = 100) val password: String`, `@field:NotBlank @field:Size(max = 100) val displayName: String`
+DTO `RequestCodeRequest`: `@field:Email @field:NotBlank val email: String`, `// 新規登録用（任意）。検証成功時に未登録メールならこの名前でアカウントを作成する。
+    @field:Size(max = 100) val displayName: String? = null`
 
-DTO `LoginRequest`: `@field:NotBlank val email: String`, `@field:NotBlank val password: String`
+DTO `VerifyCodeRequest`: `@field:Email @field:NotBlank val email: String`, `@field:NotBlank @field:Pattern(regexp = "\\d{6}") val code: String`
+
+DTO `RequestCodeResponse`: `val sent: Boolean = true`
 
 DTO `AuthResponse`: `val token: String`, `val userId: Long`, `val householdId: Long`, `val email: String`, `val displayName: String`
 
